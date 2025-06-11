@@ -1,0 +1,10 @@
+.logo {
+  height: 150px;
+  cursor: pointer;
+}
+
+.subtitle {
+  font-style: italic;
+  font-size: 'x-large';
+  color: 'coral';
+}
