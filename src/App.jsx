@@ -6,7 +6,6 @@ function App() {
     <>
       <Banner headerText="Providing houses all over the world." />
       <Banner />
-      
     </>
   )
 }
