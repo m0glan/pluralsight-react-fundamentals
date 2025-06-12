@@ -1,31 +1,45 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import HouseRow from "./HouseRow";
 
-const housesArray = [
-  {
-    id: 1,
-    address: "12 Valley of Kings, Geneva",
-    country: "Switzerland",
-    price: 900000,
-  },
-  {
-    id: 2,
-    address: "89 Road of Forks, Bern",
-    country: "Switzerland",
-    price: 500000,
-  },
-];
-
 const HouseList = () => {
-  const [ houses, setHouses ] = useState(housesArray);
-  
-  const addHouse = () => {
-    setHouses([ ...houses, {
-      id: houses.length + 1,
-      address: "New House Address",
-      country: "New Country",
-      price: 1000000,
-    } ])
+  const [ houses, setHouses ] = useState([]);
+  useEffect(() => {
+    const fetchHouses = async () => {
+      const response = await fetch("https://localhost:4000/house");
+      const houses = await response.json();
+      setHouses(houses);
+    }
+
+    fetchHouses();
+  }, [])
+
+  const addHouse = async () => {
+    try {
+      const response = await fetch("https://localhost:4000/house", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          address: "New House Address",
+          country: "New Country",
+          price: 1000000,
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to add house");
+      }
+
+      const newHouse = await response.json();
+      setHouses([ ...houses, newHouse ]);
+    } catch (error) {
+      if (error.message) {
+        window.alert(`Error adding house: "${error.message}".`);
+      } else {
+        window.alert("Error adding house: An unknown error occurred.");
+      }
+    }
   }
 
   return (

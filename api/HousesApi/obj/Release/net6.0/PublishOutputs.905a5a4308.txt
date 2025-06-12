@@ -1,0 +1,11 @@
+C:\Users\rolan\Dropbox\Presentaties\ReactWorkshop\PublicMan\HousesApi\HousesApi\obj\Release\net6.0\PubTmp\Out\HousesApi.exe
+C:\Users\rolan\Dropbox\Presentaties\ReactWorkshop\PublicMan\HousesApi\HousesApi\obj\Release\net6.0\PubTmp\Out\appsettings.Development.json
+C:\Users\rolan\Dropbox\Presentaties\ReactWorkshop\PublicMan\HousesApi\HousesApi\obj\Release\net6.0\PubTmp\Out\appsettings.json
+C:\Users\rolan\Dropbox\Presentaties\ReactWorkshop\PublicMan\HousesApi\HousesApi\obj\Release\net6.0\PubTmp\Out\HousesApi.dll
+C:\Users\rolan\Dropbox\Presentaties\ReactWorkshop\PublicMan\HousesApi\HousesApi\obj\Release\net6.0\PubTmp\Out\HousesApi.deps.json
+C:\Users\rolan\Dropbox\Presentaties\ReactWorkshop\PublicMan\HousesApi\HousesApi\obj\Release\net6.0\PubTmp\Out\HousesApi.runtimeconfig.json
+C:\Users\rolan\Dropbox\Presentaties\ReactWorkshop\PublicMan\HousesApi\HousesApi\obj\Release\net6.0\PubTmp\Out\HousesApi.pdb
+C:\Users\rolan\Dropbox\Presentaties\ReactWorkshop\PublicMan\HousesApi\HousesApi\obj\Release\net6.0\PubTmp\Out\Microsoft.OpenApi.dll
+C:\Users\rolan\Dropbox\Presentaties\ReactWorkshop\PublicMan\HousesApi\HousesApi\obj\Release\net6.0\PubTmp\Out\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\rolan\Dropbox\Presentaties\ReactWorkshop\PublicMan\HousesApi\HousesApi\obj\Release\net6.0\PubTmp\Out\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\rolan\Dropbox\Presentaties\ReactWorkshop\PublicMan\HousesApi\HousesApi\obj\Release\net6.0\PubTmp\Out\Swashbuckle.AspNetCore.SwaggerUI.dll
