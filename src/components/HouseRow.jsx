@@ -1,6 +1,6 @@
 import currencyFormatter from "../helpers/currency-formatter";
 
-const HouseRow = ({house}) => {
+const HouseRow = ({ house }) => {
   return (
     <tr>
       <td>{house.address}</td>
