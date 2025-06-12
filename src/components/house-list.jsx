@@ -1,17 +1,9 @@
-import { useEffect, useState } from "react";
-import HouseRow from "./HouseRow";
+import HouseRow from "./house-row";
+import Button from "./button";
+import useHouses from "../hooks/use-houses";
 
-const HouseList = () => {
-  const [ houses, setHouses ] = useState([]);
-  useEffect(() => {
-    const fetchHouses = async () => {
-      const response = await fetch("https://localhost:4000/house");
-      const houses = await response.json();
-      setHouses(houses);
-    }
-
-    fetchHouses();
-  }, [])
+const HouseList = ({ onSelectionChanged }) => {
+  const { houses, setHouses } = useHouses();
 
   const addHouse = async () => {
     try {
@@ -58,11 +50,11 @@ const HouseList = () => {
           </tr>
         </thead>
         <tbody>
-          {houses.map(h => <HouseRow key={h.id} house={h} />)} {/* key attribute is important for React to identify elements in an array of elements */}
+          {houses.map(h => <HouseRow key={h.id} house={h} onClick={onSelectionChanged} />)} {/* key attribute is important for React to identify elements in an array of elements */}
         </tbody>
       </table>
 
-      <button className="btn btn-primary" onClick={addHouse}>Add</button>
+      <Button onClick={addHouse}>Add</Button>
     </>
   );
 };

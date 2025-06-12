@@ -1,6 +1,6 @@
 import logo from '../assets/globo-logo.png';
-import { logo as logoClass } from './Banner.module.css';
-import { subtitle as subtitleClass } from './Banner.module.css';
+import { logo as logoClass } from './banner.module.css';
+import { subtitle as subtitleClass } from './banner.module.css';
 import propTypes from 'prop-types';
 
 function Banner({ children }) {

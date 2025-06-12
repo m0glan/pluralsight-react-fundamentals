@@ -22,3 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+api/HousesApi/obj/Debug/net8.0/HousesApi.AssemblyInfo.cs
+api/HousesApi/obj/Debug/net8.0/HousesApi.AssemblyInfoInputs.cache
+api/HousesApi/obj/Debug/net8.0/HousesApi.assets.cache
+api/HousesApi/obj/Debug/net8.0/HousesApi.GeneratedMSBuildEditorConfig.editorconfig
