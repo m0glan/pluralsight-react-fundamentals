@@ -1,7 +1,7 @@
-const loadingStatus = {
+const loadingState = {
   loaded: 'Loaded',
   isLoading: 'Loading...',
   hasErrored: 'An error occurred while loading.'
 };
 
-export default loadingStatus;
+export default loadingState;

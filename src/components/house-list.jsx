@@ -1,12 +1,19 @@
 import HouseRow from "./house-row";
 import Button from "./button";
 import useHouses from "../hooks/use-houses";
+import loadingState from "../helpers/loading-state";
+import LoadingIndicator from "./loading-indicator";
 
 const HouseList = ({ onSelectionChanged }) => {
-  const { houses, setHouses } = useHouses();
+  const { houses, setHouses, currentLoadingState, setCurrentLoadingState } = useHouses();
+
+  if (currentLoadingState === loadingState.isLoading) {
+    return <LoadingIndicator loadingState={currentLoadingState} />;
+  }
 
   const addHouse = async () => {
     try {
+      setCurrentLoadingState(loadingState.isLoading);
       const response = await fetch("https://localhost:4000/house", {
         method: "POST",
         headers: {
@@ -25,12 +32,9 @@ const HouseList = ({ onSelectionChanged }) => {
 
       const newHouse = await response.json();
       setHouses([ ...houses, newHouse ]);
-    } catch (error) {
-      if (error.message) {
-        window.alert(`Error adding house: "${error.message}".`);
-      } else {
-        window.alert("Error adding house: An unknown error occurred.");
-      }
+      setCurrentLoadingState(loadingState.loaded);
+    } catch {
+      setCurrentLoadingState(loadingState.hasErrored);
     }
   }
 
@@ -50,7 +54,8 @@ const HouseList = ({ onSelectionChanged }) => {
           </tr>
         </thead>
         <tbody>
-          {houses.map(h => <HouseRow key={h.id} house={h} onClick={onSelectionChanged} />)} {/* key attribute is important for React to identify elements in an array of elements */}
+          {/* key attribute is important for React to identify elements in an array of elements */}
+          {houses.map(h => <HouseRow key={h.id} house={h} onClick={onSelectionChanged} />)}
         </tbody>
       </table>
 
