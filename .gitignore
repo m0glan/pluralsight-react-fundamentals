@@ -24,3 +24,4 @@ dist-ssr
 *.sw?
 bin/*
 obj/*
+api/HousesApi/bin/Debug/net8.0/HousesApi.dll

@@ -1,9 +1,33 @@
-import { useContext } from "react";
+import { useParams } from "react-router";
 import currencyFormatter from "../helpers/currency-formatter";
-import navigationContext from "../navigation/navigation-context";
+import { useEffect, useState } from "react";
+import LoadingIndicator from "./loading-indicator";
+import loadingState from "../helpers/loading-state";
 
 const House = () => {
-  const { param: house } = useContext(navigationContext)
+  const { id } = useParams();
+  const [ house, setHouse ] = useState({});
+  const [ currentLoadingState, setCurrentLoadingState ] = useState(loadingState.isLoading);
+
+  useEffect(() => {
+    const fetchHouse = async() => {
+      try {
+        const response = await fetch(`https://localhost:4000/house/${id}`);
+        const house = await response.json();
+        setHouse(house);
+        setCurrentLoadingState(loadingState.loaded);
+      } catch(err) {
+        console.error("Error fetching house:", err);
+        setCurrentLoadingState(loadingState.hasErrored);
+      }
+    }
+
+    fetchHouse();
+  })
+
+  if (currentLoadingState === loadingState.isLoading) {
+    return <LoadingIndicator loadingState={currentLoadingState} />;
+  }
 
   return (
     <>

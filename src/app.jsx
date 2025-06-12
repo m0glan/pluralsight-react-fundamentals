@@ -1,26 +1,24 @@
-import { useCallback, useState } from 'react'
 import './app.css'
 import Banner from './components/banner'
 import ErrorBoundary from './components/error-boundary'
-import navigationValues from './navigation/navigation-values'
-import navigationContext from './navigation/navigation-context'
-import ComponentPicker from './components/component-picker'
+import { BrowserRouter, Route, Routes } from 'react-router'
+import HouseList from './components/house-list'
+import House from './components/house'
 
 function App() {
-  const navigate = useCallback((target, param) => setNavigation({ currentLocation: target, param, navigate }), []);
-
-  const [ navigation, setNavigation ] = useState({ currentLocation: navigationValues.home, navigate });
-
   return (
-    <navigationContext.Provider value={navigation}>
+    <BrowserRouter>
       <ErrorBoundary fallback="It's over">
         <Banner>
           <div>Providing houses all over the world.</div>
         </Banner>
 
-        <ComponentPicker currentNavigationLocation={navigation.currentLocation} />
+        <Routes>
+          <Route index element={<HouseList />} />
+          <Route path="house/:id" element={<House />} />
+        </Routes>
       </ErrorBoundary>
-    </navigationContext.Provider>
+    </BrowserRouter>
   )
 }
 

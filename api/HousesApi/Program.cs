@@ -1,4 +1,5 @@
 using HousesApi;
+using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -33,6 +34,12 @@ app.MapPost("/house", async (HouseRepository repo, House house) =>
 {
     await Task.Delay(2000);
     return repo.Add(house);
+});
+
+app.MapGet("/house/{id}", async (HouseRepository repo, int id) =>
+{
+    await Task.Delay(2000);
+    return repo.GetAll().SingleOrDefault(h => h.Id == id);
 });
 
 app.MapGet("/bid/{houseId}", async (BidRepository repo, int houseId) =>
