@@ -1,25 +1,26 @@
 import { useCallback, useState } from 'react'
 import './app.css'
 import Banner from './components/banner'
-import HouseList from './components/house-list'
-import House from './components/house'
 import ErrorBoundary from './components/error-boundary'
+import navigationValues from './navigation/navigation-values'
+import navigationContext from './navigation/navigation-context'
+import ComponentPicker from './components/component-picker'
 
 function App() {
-  const [ selectedHouse, setSelectedHouse ] = useState();
+  const navigate = useCallback((target, param) => setNavigation({ currentLocation: target, param, navigate }), []);
 
-  const handleHouseSelectionChanged = useCallback(house => {
-    setSelectedHouse(house);
-  }, []);
+  const [ navigation, setNavigation ] = useState({ currentLocation: navigationValues.home, navigate });
 
   return (
-    <ErrorBoundary fallback="It's over">
-      <Banner>
-        <div>Providing houses all over the world.</div>
-      </Banner>
+    <navigationContext.Provider value={navigation}>
+      <ErrorBoundary fallback="It's over">
+        <Banner>
+          <div>Providing houses all over the world.</div>
+        </Banner>
 
-      {selectedHouse ? <House house={selectedHouse} /> : <HouseList onSelectionChanged={handleHouseSelectionChanged} />}
-    </ErrorBoundary>
+        <ComponentPicker currentNavigationLocation={navigation.currentLocation} />
+      </ErrorBoundary>
+    </navigationContext.Provider>
   )
 }
 

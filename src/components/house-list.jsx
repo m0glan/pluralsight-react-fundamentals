@@ -4,7 +4,7 @@ import useHouses from "../hooks/use-houses";
 import loadingState from "../helpers/loading-state";
 import LoadingIndicator from "./loading-indicator";
 
-const HouseList = ({ onSelectionChanged }) => {
+const HouseList = () => {
   const { houses, setHouses, currentLoadingState, setCurrentLoadingState } = useHouses();
 
   if (currentLoadingState === loadingState.isLoading) {
@@ -55,7 +55,7 @@ const HouseList = ({ onSelectionChanged }) => {
         </thead>
         <tbody>
           {/* key attribute is important for React to identify elements in an array of elements */}
-          {houses.map(h => <HouseRow key={h.id} house={h} onClick={onSelectionChanged} />)}
+          {houses.map(h => <HouseRow key={h.id} house={h} />)}
         </tbody>
       </table>
 

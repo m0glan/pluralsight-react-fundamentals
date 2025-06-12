@@ -1,6 +1,10 @@
+import { useContext } from "react";
 import currencyFormatter from "../helpers/currency-formatter";
+import navigationContext from "../navigation/navigation-context";
 
-const House = ({ house }) => {
+const House = () => {
+  const { param: house } = useContext(navigationContext)
+
   return (
     <>
       <div className="row">
