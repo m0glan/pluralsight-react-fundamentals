@@ -3,7 +3,7 @@ import { logo as logoClass } from './Banner.module.css';
 import { subtitle as subtitleClass } from './Banner.module.css';
 import propTypes from 'prop-types';
 
-function Banner({children}) {
+function Banner({ children }) {
   return (
     <header className='row'>
       <div className='col-5 mb-4'>
