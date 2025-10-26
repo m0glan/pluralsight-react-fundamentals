@@ -24,15 +24,5 @@ dist-ssr
 *.sw?
 bin/*
 obj/*
-api/HousesApi/bin/Debug/net8.0/HousesApi.dll
-api/HousesApi/obj/HousesApi.csproj.nuget.dgspec.json
-api/HousesApi/obj/HousesApi.csproj.nuget.g.props
-api/HousesApi/obj/HousesApi.csproj.nuget.g.targets
-api/HousesApi/obj/project.assets.json
-api/HousesApi/obj/project.nuget.cache
-api/HousesApi/obj/Debug/net8.0/apphost
-api/HousesApi/obj/Debug/net8.0/HousesApi.AssemblyInfo.cs
-api/HousesApi/obj/Debug/net8.0/HousesApi.AssemblyInfoInputs.cache
-api/HousesApi/obj/Debug/net8.0/HousesApi.assets.cache
-api/HousesApi/obj/Debug/net8.0/HousesApi.csproj.AssemblyReference.cache
-api/HousesApi/obj/Debug/net8.0/HousesApi.GeneratedMSBuildEditorConfig.editorconfig
+api/HousesApi/bin/*
+api/HousesApi/obj/*
