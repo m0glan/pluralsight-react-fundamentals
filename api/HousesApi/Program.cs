@@ -36,22 +36,22 @@ app.MapPost("/house", async (HouseRepository repo, House house) =>
     return repo.Add(house);
 });
 
-app.MapGet("/house/{id}", async (HouseRepository repo, int id) =>
+app.MapGet("/house/{id:int}", async (HouseRepository repo, int id) =>
 {
     await Task.Delay(2000);
     return repo.GetAll().SingleOrDefault(h => h.Id == id);
 });
 
-app.MapGet("/bid/{houseId}", async (BidRepository repo, int houseId) =>
+app.MapGet("/house/{houseId:int}/bids", async (BidRepository repo, int houseId) =>
 {
     await Task.Delay(2000);
     return repo.GetBids(houseId);
 });
 
-app.MapPost("/bid", async (BidRepository repo, Bid bid) =>
+app.MapPost("/house/{houseId:int}/bid", async (BidRepository repo, int houseId, Bid bid) =>
 {
     await Task.Delay(2000);
-    repo.Add(bid);
+    repo.Add(houseId, bid);
     return bid;
 });
 app.Run();

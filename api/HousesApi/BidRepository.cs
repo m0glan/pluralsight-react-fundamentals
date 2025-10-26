@@ -94,10 +94,11 @@ public class BidRepository
         return bids.Where(b => b.HouseId == houseId);
     }
     
-    public void Add(Bid bid)
+    public void Add(int houseId, Bid bid)
     {
         var maxId = bids.Max(b => b.Id);
         bid.Id = maxId + 1;
+        bid.HouseId = houseId;
         bids.Add(bid);
     }
 };
