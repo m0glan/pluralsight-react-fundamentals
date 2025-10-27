@@ -1,4 +1,4 @@
-import './app.css'
+import './App.css'
 import Banner from './components/banner'
 import ErrorBoundary from './components/error-boundary'
 import { BrowserRouter, Route, Routes } from 'react-router'
