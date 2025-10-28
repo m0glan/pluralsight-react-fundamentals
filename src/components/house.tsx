@@ -3,6 +3,7 @@ import {
   useCallback,
   useEffect,
   useState,
+  useTransition,
 } from 'react'
 import { useParams } from 'react-router'
 import currencyFormatter from '../helpers/currency-formatter'
@@ -29,9 +30,10 @@ const House = () => {
     loadingState.isLoading,
   )
   const [ newBid, setNewBid ] = useState<NewBidState>(createDefaultBidState())
-  const [ isAddBtnDisabled, setIsAddBtnDisabled ] = useState(false)
 
-  const submitBid = useCallback(async () => {
+  const [ isPending, startTransition ] = useTransition();
+
+  const addBid = async () => {
     if (!id) {
       return;
     }
@@ -42,7 +44,6 @@ const House = () => {
     }
 
     try {
-      setIsAddBtnDisabled(true)
       const response = await fetch(`https://localhost:4000/house/${id}/bid`, {
         method: 'POST',
         headers: {
@@ -60,12 +61,14 @@ const House = () => {
 
       const createdBid = (await response.json()) as Bid;
       setBids((prevBids) => [ ...prevBids, createdBid ]);
-      setNewBid(createDefaultBidState());
     } catch (error) {
       console.error('Error submitting bid:', error);
-    } finally {
-      setIsAddBtnDisabled(false);
     }
+  }
+
+  const submitBid = useCallback(async () => {
+    startTransition(async () => await addBid());
+    setNewBid(createDefaultBidState());
   }, [ id, newBid ])
 
   useEffect(() => {
@@ -189,7 +192,7 @@ const House = () => {
               </div>
 
               <div className="col-2 mt-3">
-                <Button onClick={submitBid} disabled={isAddBtnDisabled}>Add</Button>
+                <Button onClick={submitBid} disabled={isPending}>Add</Button>
               </div>
             </div>
           </div>
