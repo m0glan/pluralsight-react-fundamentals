@@ -1,6 +1,4 @@
 import {
-  type ChangeEvent,
-  useCallback,
   useEffect,
   useState,
   useTransition,
@@ -12,15 +10,10 @@ import LoadingIndicator from './loading-indicator'
 import { Bid, HouseDetail } from '../types'
 import Button from './button'
 
-interface NewBidState {
+interface NewBid {
   bidder: string
   amount: string
 }
-
-const createDefaultBidState = (): NewBidState => ({
-  bidder: '',
-  amount: '',
-})
 
 const House = () => {
   const { id } = useParams<{ id: string }>()
@@ -29,11 +22,9 @@ const House = () => {
   const [ currentLoadingState, setCurrentLoadingState ] = useState<LoadingState>(
     loadingState.isLoading,
   )
-  const [ newBid, setNewBid ] = useState<NewBidState>(createDefaultBidState())
-
   const [ isPending, startTransition ] = useTransition();
 
-  const addBid = async () => {
+  const addBid = async (newBid: NewBid) => {
     if (!id) {
       return;
     }
@@ -66,10 +57,14 @@ const House = () => {
     }
   }
 
-  const submitBid = useCallback(async () => {
-    startTransition(async () => await addBid());
-    setNewBid(createDefaultBidState());
-  }, [ id, newBid ])
+  const bidSubmitAction = async (formData: FormData) => {
+    startTransition(async () =>
+      await addBid({
+        bidder: formData.get('bidder')?.toString() ?? '',
+        amount: formData.get('amount')?.toString() ?? ''
+      })
+    );
+  }
 
   useEffect(() => {
     if (!id) {
@@ -106,15 +101,6 @@ const House = () => {
 
     void fetchData()
   }, [ id ])
-
-  const handleInputChange = (field: keyof NewBidState) => {
-    return (event: ChangeEvent<HTMLInputElement>) => {
-      setNewBid((prev) => ({
-        ...prev,
-        [field]: event.target.value,
-      }))
-    }
-  }
 
   if (currentLoadingState !== loadingState.loaded || !house) {
     return <LoadingIndicator loadingState={currentLoadingState} />
@@ -172,29 +158,31 @@ const House = () => {
               </tbody>
             </table>
 
-            <div className="row">
+            <form className="row" action={bidSubmitAction}>
               <div className="col-4 mt-3">
                 <input
-                  value={newBid.bidder}
-                  onChange={handleInputChange('bidder')}
+                  id="bidder"
+                  name="bidder"
                   className="form-control"
                   placeholder="Your name"
+                  disabled={isPending}
                 />
               </div>
 
               <div className="col-4 mt-3">
                 <input
-                  value={newBid.amount}
-                  onChange={handleInputChange('amount')}
+                  id="amount"
+                  name="amount"
                   className="form-control"
                   placeholder="Your bid"
+                  disabled={isPending}
                 />
               </div>
 
               <div className="col-2 mt-3">
-                <Button onClick={submitBid} disabled={isPending}>Add</Button>
+                <Button type="submit" disabled={isPending}>Add</Button>
               </div>
-            </div>
+            </form>
           </div>
         </div>
       </div>
