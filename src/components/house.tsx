@@ -9,6 +9,7 @@ import currencyFormatter from '../helpers/currency-formatter'
 import loadingState, { type LoadingState } from '../helpers/loading-state'
 import LoadingIndicator from './loading-indicator'
 import { Bid, HouseDetail } from '../types'
+import Button from './button'
 
 interface NewBidState {
   bidder: string
@@ -188,13 +189,7 @@ const House = () => {
               </div>
 
               <div className="col-2 mt-3">
-                <button
-                  onClick={submitBid}
-                  className="btn btn-primary"
-                  disabled={isAddBtnDisabled}
-                >
-                  Add
-                </button>
+                <Button onClick={submitBid} disabled={isAddBtnDisabled}>Add</Button>
               </div>
             </div>
           </div>
